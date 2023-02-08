@@ -1,0 +1,28 @@
+
+.button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    height: 40px;
+    width: 178px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    &__white{
+        border: 1px solid #C4C4C4;
+        color: #515151;
+    }
+    &__grey{
+        background: #C4C4C4;
+        color: #515151;
+    }
+    &__dark-grey{
+        background: #515151;
+        color: #FFFFFF;
+    }
+}

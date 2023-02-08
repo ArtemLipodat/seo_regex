@@ -1,0 +1,27 @@
+@import "variables";
+header{
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    &__logo{
+        a{
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 28px;
+            color: $dark-text;
+        }
+    }
+    &__buttons{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        .user{
+            font-weight: 700;
+        }
+    }
+}
