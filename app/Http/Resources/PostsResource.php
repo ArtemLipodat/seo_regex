@@ -18,6 +18,7 @@ class PostsResource extends JsonResource
     public function toArray($request): array|\JsonSerializable|Arrayable {
         return [
             'id' => $this->id,
+            'author' => (new UserResource($this->resource))->toArray($this->author),
             'title' => $this->title,
             'description' => $this->description,
             'image_thumb' => Storage::url('image/post/thumbnail/') . $this->image_path,

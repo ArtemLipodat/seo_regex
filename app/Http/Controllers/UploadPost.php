@@ -23,7 +23,7 @@ class UploadPost extends Controller {
     function add(Request $request){
         $request->validate([
             'title' => ['required', 'string','max:255'],
-            'description' => ['required', 'string', 'min:8'],
+            'description' => ['required', 'string', 'min:1'],
         ]);
 
         $data = $request->all();
@@ -32,13 +32,27 @@ class UploadPost extends Controller {
         $data['image']->move(Storage::path('/public/image/post/').'origin/', $filename);
 
         $thumbnail = Image::make(Storage::path('/public/image/post/').'origin/'.$filename);
-        $thumbnail->fit(290, 360);
+//        $thumbnail->fit(290, 360);
+
+        $height = $thumbnail->height();
+        $width = $thumbnail->width();
+
+        if($height >= 601) {
+            $thumbnail->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+        if($width >= 601) {
+            $thumbnail->resize(null, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
 
         $thumbnail->save(Storage::path('/public/image/post/').'thumbnail/'.$filename);
 
         if (Auth::check()) {
             $data['status'] = $this->approved;
-            $data['author'] = Auth::user()->email;
+            $data['author'] = Auth::id();
         } else {
             $data['status'] = $this->no_approved;
         }
