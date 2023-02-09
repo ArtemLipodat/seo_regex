@@ -4,7 +4,7 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+import Posts from './components/Posts.vue';
+app.component('posts', Posts);
 
 app.mount('#app');

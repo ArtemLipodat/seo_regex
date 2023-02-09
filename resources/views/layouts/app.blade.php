@@ -19,7 +19,7 @@
         <div class="container">
             <div class="header">
             <div class="header__logo">
-                <a href="">{{ config('app.name', 'Laravel') }}</a>
+                <a href="/">{{ config('app.name', 'Laravel') }}</a>
             </div>
             <div class="header__buttons">
                 @if(auth()->check())

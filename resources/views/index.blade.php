@@ -4,5 +4,5 @@
 {{--{{ dd(\Illuminate\Support\Facades\Auth::user()->hasRole('admin')) }}--}}
 
 @section('content')
-
+    <posts></posts>
 @endsection
