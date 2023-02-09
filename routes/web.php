@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UploadPost;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,11 @@ Route::get('/login_form', function () {
 Route::get('/register_form', function () {
     return view('auth.register');
 });
+
+Route::get('upload', function () {
+    return view('upload');
+})->name('upload');
+
+Route::post('upload/add', [UploadPost::class, 'add'])->name('add');
 
 Auth::routes();

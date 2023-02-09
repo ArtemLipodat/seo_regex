@@ -29,7 +29,7 @@
                     </div>
                 @endif
                 <a href="" class="button button__white"><i class="favorite"></i>Favorites</a>
-                <a href="" class="button button__grey">Upload</a>
+                <a href="{{ route('upload') }}" class="button button__grey">Upload</a>
                 @if(auth()->check())
                     <a href="{{ route('logout') }}" class="button button__dark-grey">Logout</a>
                 @else

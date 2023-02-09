@@ -1,4 +1,5 @@
 import './bootstrap';
+import './fileUploadListener';
 import { createApp } from 'vue';
 
 const app = createApp({});
