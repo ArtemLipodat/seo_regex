@@ -50,7 +50,7 @@ class UploadPost extends Controller {
 
         $thumbnail->save(Storage::path('/public/image/post/').'thumbnail/'.$filename);
 
-        if (Auth::check()) {
+        if (Auth::user()->hasRole('admin')) {
             $data['status'] = $this->approved;
             $data['author'] = Auth::id();
         } else {
