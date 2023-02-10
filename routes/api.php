@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('posts', [PostsController::class, 'index']);
+
+Route::get('/favorite/{id?}', [FavoritesController::class, 'show']);
+
+Route::post('favorite/add', [FavoritesController::class, 'store']);

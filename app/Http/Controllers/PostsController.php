@@ -15,7 +15,7 @@ class PostsController extends Controller {
      * @return AnonymousResourceCollection
      */
     public function index(): AnonymousResourceCollection {
-        $posts = Posts::all();
+        $posts = Posts::where('status', 1)->get();
         return PostsResource::collection($posts);
     }
 

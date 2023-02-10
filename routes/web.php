@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\UploadPost;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,9 @@ Route::get('/login_form', function () {
 Route::get('/register_form', function () {
     return view('auth.register');
 });
+
+Route::middleware('auth')->get('/favorite/{id?}', [FavoritesController::class, 'index'])->name('favorite');
+
 
 Route::get('upload', function () {
     return view('upload');

@@ -4,20 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Favorites extends Model
+class FavoritesAdded extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'post_id',
-        'user_id',
+        'added'
     ];
 
-    public function post() {
-        return $this->belongsTo(Posts::class);
+    public function posts() {
+        $this->hasMany(Posts::class);
     }
 
 }

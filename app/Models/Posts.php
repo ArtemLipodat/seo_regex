@@ -16,4 +16,8 @@ class Posts extends Model {
         'status'
     ];
 
+    public function favorites() {
+        return $this->hasMany(Favorites::class);
+    }
+
 }

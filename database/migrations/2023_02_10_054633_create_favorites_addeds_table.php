@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('favorites', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('post_id');
+        Schema::create('favorites_addeds', function (Blueprint $table) {
+            $table->unsignedBigInteger('post_id')->unsigned();
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-            $table->integer('user_id');
+            $table->integer('added');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('favorites_addeds');
     }
 };

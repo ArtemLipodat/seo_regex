@@ -14,6 +14,8 @@ class UserResource extends JsonResource {
      * @return array|Arrayable|\JsonSerializable
      */
     public function toArray($request): array|\JsonSerializable|Arrayable {
-        return User::query()->find($request);
+        $user = User::query()->find($request);
+        if ($user) return $user;
+        return [];
     }
 }
