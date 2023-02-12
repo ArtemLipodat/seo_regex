@@ -1,8 +1,7 @@
 <template>
     <div class="posts">
         <div v-for="post in posts" :key="post.id" class="posts__item">
-            <a :href="post.image" class="image-link">aaa</a>
-            <img :src="post.image_thumb">
+            <a :href="post.image" class="image-link"><img :src="post.image_thumb"></a>
             <span v-if="post.author.email" >{{ post.author.email }}</span>
             <h3>{{ post.title }}</h3>
             <p>{{ post.description }}</p>
