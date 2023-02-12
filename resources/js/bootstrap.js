@@ -2,6 +2,11 @@ import _ from 'lodash';
 window._ = _;
 import $ from 'jquery';
 window.$ = $;
+import('magnific-popup');
+
+$(document).ready(function() {
+    $('.image-link').magnificPopup({type:'image'});
+});
 
 function tabs(el){
     let singInButton = $('#sing_in'),

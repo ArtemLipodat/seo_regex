@@ -1,31 +1,40 @@
 <template>
     <div class="posts">
         <div v-for="post in posts" :key="post.id" class="posts__item">
+            <a :href="post.image" class="image-link">aaa</a>
             <img :src="post.image_thumb">
             <span v-if="post.author.email" >{{ post.author.email }}</span>
             <h3>{{ post.title }}</h3>
             <p>{{ post.description }}</p>
-            <a v-if="post.author.id" class="posts__button" v-on:click="favoriteAdd(post.id, post.author.id)"><i class="favorite"></i>{{ post.favorite_added.added }}</a>
+            <a v-if="userID" class="posts__button" v-on:click="favoriteAdd(post.id)"><i class="favorite"></i>{{ post.favorite_added.added }}</a>
         </div>
     </div>
 </template>
 
 <script>
     export default {
+        props: ['user'],
         data() {
             return {
                 posts: null,
-                isLoading: true
+                isLoading: true,
+                userID: null
             }
         },
         mounted() {
+            if (this.user){
+                this.userID = JSON.parse(this.user).id
+            }
+            console.log(this.userID)
             axios.get('api/posts').then(response => (this.posts = response.data.data))
         },
         methods: {
             favoriteAdd(post_id, user_id) {
-                axios.post('api/favorite/add',{post_id: post_id,user_id: user_id}).then((response) => {
+                axios.post('api/favorite/add',{post_id: post_id, user_id: this.userID}).then((response) => {
                     this.posts.map((el) => {
-                        el.favorite_added.added += response.data.added.added
+                        if (el.id === response.data.added.post_id){
+                            el.favorite_added.added += 1
+                        }
                     })
                 })
             }

@@ -5,20 +5,25 @@
             <span v-if="favorite.post.author.email" >{{ favorite.post.author.email }}</span>
             <h3>{{ favorite.post.title }}</h3>
             <p>{{ favorite.post.description }}</p>
-            <a v-if="favorite.post.author.id" class="posts__button" v-on:click="favoriteDelete(favorite.id)"><i class="favorite"></i>{{ favorite.post.favorite_added.added }}</a>
+            <a class="posts__button" v-on:click="favoriteDelete(favorite.id)"><i class="favorite"></i>{{ favorite.post.favorite_added.added }}</a>
         </div>
     </div>
 </template>
 
 <script>
     export default {
+        props: ['user'],
         data() {
             return {
                 favorites: null,
+                userID: null
             }
         },
         mounted() {
-            axios.get('/api/favorite/1').then(response => (this.favorites = response.data)).then(() => {
+            if (this.user){
+                this.userID = JSON.parse(this.user).id
+            }
+            axios.get('/api/favorite/' + this.userID).then(response => (this.favorites = response.data)).then(() => {
                 axios.get('/api/posts').then(responsePosts => {
                     responsePosts.data.data.map( (post) => {
                         this.favorites.map((el) => {
@@ -28,7 +33,7 @@
                         })
                     })
                 })
-            })
+            }).then(() => console.log(this.favorites))
         },
         methods: {
             favoriteDelete(post_id) {

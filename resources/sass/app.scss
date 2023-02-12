@@ -200,11 +200,16 @@ a{
             font-size: 18px;
             color: #000000;
             margin-bottom: 20px;
+            word-break: break-all;
         }
         span{
             font-weight: 400;
             font-size: 16px;
             color: #000000;
+            word-break: break-all;
+        }
+        p{
+            word-break: break-all;
         }
     }
     &__button{
@@ -218,13 +223,13 @@ a{
 
 @media only screen and (max-width: 768px) {
     .posts {
-        column-count: 4;
+        column-count: 2;
     }
 }
 
 @media only screen and (max-width: 371px) {
     .posts {
-        column-count: 2;
+        column-count: 1;
     }
 }
 

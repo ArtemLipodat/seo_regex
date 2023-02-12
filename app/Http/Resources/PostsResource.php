@@ -22,6 +22,7 @@ class PostsResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image_thumb' => Storage::url('image/post/thumbnail/') . $this->image_path,
+            'image' => Storage::url('image/post/origin/') . $this->image_path,
             'favorite_added' => (new FavoritesResource($this->resource))->toArray($this->id)
         ];
     }

@@ -2,5 +2,5 @@
 @section('title', 'Favorite')
 
 @section('content')
-    <favorite></favorite>
+    <favorite user="{{ \Illuminate\Support\Facades\Auth::user() }}"></favorite>
 @endsection

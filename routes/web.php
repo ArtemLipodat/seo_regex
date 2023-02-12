@@ -29,7 +29,7 @@ Route::get('/register_form', function () {
 Route::middleware('auth')->get('/favorite/{id?}', [FavoritesController::class, 'index'])->name('favorite');
 
 
-Route::get('upload', function () {
+Route::middleware('auth')->get('upload', function () {
     return view('upload');
 })->name('upload');
 

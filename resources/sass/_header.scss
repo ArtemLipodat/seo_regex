@@ -25,3 +25,12 @@ header{
         }
     }
 }
+
+@media only screen and (max-width: 640px) {
+    .header {
+        flex-direction: column;
+        &__buttons{
+            flex-direction: column;
+        }
+    }
+}

@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use function MongoDB\BSON\toJSON;
 
@@ -39,30 +40,41 @@ class FavoritesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $isFavorite = Favorites::where('post_id', $request->input('post_id'))->first();
-
         $favoriteAdded = [];
         $favorite = [];
 
+        $isFavorite = DB::table('favorites')->select('id')->where([
+            ['user_id', '=', $request->input('user_id')],
+            ['post_id', '=', $request->input('post_id')]
+        ])->first();
+
         if ($isFavorite) {
             return \response(['favorite' => $favorite, 'added' => $favoriteAdded]);
+        } else{
+            Favorites::create(
+                [
+                    'post_id' => $request->input('post_id'),
+                    'user_id' => $request->input('user_id'),
+                ]
+            );
         }
 
-        $favorite = Favorites::create(
-            [
-                'post_id' => $request->input('post_id'),
-                'user_id' => $request->input('user_id'),
-            ]
-        );
         $oldValueAdded = FavoritesAdded::where('post_id', $request->input('post_id'))->first();
-        if ($favorite) {
-            $favoriteAdded = FavoritesAdded::create([
+
+        if (!$oldValueAdded) {
+            FavoritesAdded::create([
                 'post_id' => $request->input('post_id'),
-                'added' => $oldValueAdded ? $oldValueAdded->increment('added'): 1,
+                'added' => 1,
             ]);
+        } else {
+           DB::table('favorites_addeds')->where('post_id', '=', $request->input('post_id'))->update(['added' => $oldValueAdded->added + 1]);
         }
 
-        return \response(['favorite' => $favorite, 'added' => $favoriteAdded]);
+        $favoriteAdded = [
+            'post_id' => $request->input('post_id')
+        ];
+
+        return \response(['added' => $favoriteAdded]);
     }
 
     /**
