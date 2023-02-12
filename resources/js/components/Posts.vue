@@ -24,7 +24,6 @@
             if (this.user){
                 this.userID = JSON.parse(this.user).id
             }
-            console.log(this.userID)
             axios.get('api/posts').then(response => (this.posts = response.data.data))
         },
         methods: {
