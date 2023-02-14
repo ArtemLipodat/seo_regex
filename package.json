@@ -13,9 +13,11 @@
         "jquery": "^3.6.3",
         "laravel-vite-plugin": "^0.7.2",
         "lodash": "^4.17.19",
+        "magnific-popup": "^1.1.0",
         "postcss": "^8.1.14",
         "sass": "^1.56.1",
         "svg-sass": "^2.0.0",
+        "v-img": "^0.2.0",
         "vite": "^4.0.0",
         "vue": "^3.2.37"
     }

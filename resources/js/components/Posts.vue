@@ -20,6 +20,11 @@
                 userID: null
             }
         },
+        updated() {
+            this.$nextTick(function () {
+                $('.image-link').magnificPopup({type: 'image'});
+            })
+        },
         mounted() {
             if (this.user){
                 this.userID = JSON.parse(this.user).id
